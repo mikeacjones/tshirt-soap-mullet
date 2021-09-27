@@ -17,7 +17,7 @@ jobs:
           distribution: 'adopt'
           java-version: '8'
       - name: Build and deploy
-        run: mvn -B deploy -DmuleDeploy -s .maven/settings.xml
+        run: mvn -B deploy -DskipTests -DmuleDeploy -s .maven/settings.xml
         env:
           PLATFORM_USERNAME: ${{ secrets.PLATFORM_USERNAME }}
           PLATFORM_PASSWORD: ${{ secrets.PLATFORM_PASSWORD }}
