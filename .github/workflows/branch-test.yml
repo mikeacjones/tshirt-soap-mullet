@@ -13,4 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build and test
-        run: mvn package
+        run: mvn package -s .maven/settings.xml
+        env:
+          PLATFORM_USERNAME: ${{ secrets.PLATFORM_USERNAME }}
+          PLATFORM_PASSWORD: ${{ secrets.PLATFORM_PASSWORD }}
