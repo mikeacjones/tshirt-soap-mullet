@@ -2,6 +2,11 @@
 <settings>
   <servers>
     <server>
+      <id>MuleRepository</id>
+      <username>${env.NEXUS_USERNAME}</username>
+      <password>${env.NEXUS_PASSWORD}</password>
+    </server>
+    <server>
       <id>anypoint-exchange-v2</id>
       <username>${env.PLATFORM_USERNAME}</username>
       <password>${env.PLATFORM_PASSWORD}</password>
@@ -28,6 +33,26 @@
           <url>https://repository.mulesoft.org/nexus/content/repositories/public</url>
         </pluginRepository>
       </pluginRepositories>
+    </profile>
+    <profile>
+      <id>Mule</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <repositories>
+        <repository>
+          <id>MuleRepository</id>
+          <name>MuleRepository</name>
+          <url>https://repository.mulesoft.org/nexus-ee/content/repositories/releases-ee/</url>
+          <layout>default</layout>
+          <releases>
+            <enabled>true</enabled>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+          </snapshots>
+        </repository>
+      </repositories>
     </profile>
   </profiles>
 </settings>
