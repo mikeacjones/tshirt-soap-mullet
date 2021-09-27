@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.mycompany</groupId>
@@ -30,6 +32,25 @@
 				<artifactId>mule-maven-plugin</artifactId>
 				<version>${mule.maven.plugin.version}</version>
 				<extensions>true</extensions>
+				<configuration>
+					<cloudHubDeployment>
+						<muleVersion>4.3.0</muleVersion>
+						<username>${env.PLATFORM_USERNAME}</username>
+						<password>${env.PLATFORM_PASSWORD}</password>
+						<applicationName>${env.APP_NAME}</applicationName>
+						<environment>${env.PLATFORM_ENV}</environment>
+						<workers>1</workers>
+						<workerType>MICRO</workerType>
+						<objectStoreV2>true</objectStoreV2>
+						<region>us-east-2</region>
+						<businessGroupId>${env.BUSINESS_GROUP_ID}</businessGroupId>
+						<properties>
+							<anypoint.platform.client_id>${env.PLATFORM_CLIENT_ID}</anypoint.platform.client_id>
+							<anypoint.platform.client_secret>${env.PLATFORM_CLIENT_SECRET}</anypoint.platform.client_secret>
+							<anypoint.platform.autodiscovery>${env.AUTODISCOVERY_ID}</anypoint.platform.autodiscovery>
+						</properties>
+					</cloudHubDeployment>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>com.mulesoft.munit.tools</groupId>
@@ -52,23 +73,6 @@
 							<format>html</format>
 						</formats>
 					</coverage>
-					<cloudHubDeployment>
-						<muleVersion>4.3.0</muleVersion>
-						<username>${env.PLATFORM_USERNAME}</username>
-						<password>${env.PLATFORM_PASSWORD}</password>
-						<applicationName>${env.APP_NAME}</applicationName>
-						<environment>${env.PLATFORM_ENV}</environment>
-						<workers>1</workers>
-						<workerType>MICRO</workerType>
-						<objectStoreV2>true</objectStoreV2>
-						<region>us-east-2</region>
-						<businessGroupId>${env.BUSINESS_GROUP_ID}</businessGroupId>
-						<properties>
-							<anypoint.platform.client_id>${env.PLATFORM_CLIENT_ID}</anypoint.platform.client_id>
-							<anypoint.platform.client_secret>${env.PLATFORM_CLIENT_SECRET}</anypoint.platform.client_secret>
-							<anypoint.platform.autodiscovery>${env.AUTODISCOVERY_ID}</anypoint.platform.autodiscovery>
-						</properties>
-					</cloudHubDeployment>
 				</configuration>
 			</plugin>
 		</plugins>
