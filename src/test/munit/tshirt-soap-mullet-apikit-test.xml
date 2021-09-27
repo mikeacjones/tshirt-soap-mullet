@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns:validation="http://www.mulesoft.org/schema/mule/validation" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd http://www.mulesoft.org/schema/mule/munit-tools http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd 
+http://www.mulesoft.org/schema/mule/validation http://www.mulesoft.org/schema/mule/validation/current/mule-validation.xsd">
+    <munit:config name="tshirt-soap-mullet-apikit-test.xml" />
+    <http:request-config name="HTTP_Request_Configuration" basePath="/api">
+        <http:request-connection host="localhost" port="8081" />
+    </http:request-config>
+	<munit:test name="tshirt-soap-mullet-apikit-testTest" doc:id="5ebba5a6-e487-40ed-96b1-8f3c2556055a" >
+		<munit:execution >
+			<flow-ref doc:name="Flow Reference" doc:id="d342d4e9-cd83-4d94-904a-b1ba345111c5" name="get:\tshirt:tshirt-soap-mullet-config"/>
+		</munit:execution>
+		<munit:validation >
+			<validation:is-not-null doc:name="Is not null" doc:id="a4f8e64c-4af4-4432-ba93-4847c997d888" value="#[payload]"/>
+		</munit:validation>
+	</munit:test>
+</mule>
