@@ -138,7 +138,7 @@ ns ns0 http://mulesoft.org/tshirt-service
 			</ee:message>
 		</ee:transform>
 		<wsc:consume doc:name="call ListInventory function" doc:id="338dc848-f4dd-4e6d-b026-f9aa45e17184" config-ref="Web_Service_Consumer_Config" operation="ListInventory"/>
-		<ee:transform doc:name="convert ListInventory response to JSON" doc:id="3b258bc9-5109-4740-b562-03b91f78b3b9" >
+		<ee:transform doc:name="convert ListInventoryResponse to JSON" doc:id="3b258bc9-5109-4740-b562-03b91f78b3b9" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
 output application/json
@@ -154,13 +154,36 @@ payload.body.ns0#ListInventoryResponse.*inventory map ( inventory , indexOfInven
 		</ee:transform>
     </flow>
     <flow name="post:\tshirt\orders:application\json:tshirt-soap-mullet-config">
-        <logger level="INFO" message="post:\tshirt\orders:application\json:tshirt-soap-mullet-config" />
-		<ee:transform doc:name="transform SOAP XML payload to JSON" doc:id="cdafe52b-776a-4abc-ac02-8e416509cb1f" >
+		<ee:transform doc:name="create OrderTshirt SOAP payload" doc:id="91d9d9ca-bdfc-4d7d-9709-826e2dc8ad98" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
-output application/java
+output application/xml
+ns ns0 http://mulesoft.org/tshirt-service
 ---
 {
+	ns0#OrderTshirt: {
+		size: payload.size,
+		email: payload.email,
+		name: payload.name,
+		address1: payload.address1,
+		address2: payload.address2,
+		city: payload.city,
+		stateOrProvince: payload.stateOrProvince,
+		postalCode: payload.postalCode,
+		country: payload.country
+	}
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<wsc:consume doc:name="call OrderTshirt function" doc:id="3588dedf-6f73-4ad4-89c4-528be2e1af5c" config-ref="Web_Service_Consumer_Config" operation="OrderTshirt"/>
+		<ee:transform doc:name="convert OrderTshirtResponse to JSON" doc:id="03b5b05a-2089-4f4f-9414-a94ba5afd0aa" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+ns ns0 http://mulesoft.org/tshirt-service
+---
+{
+	orderId: payload.body.ns0#OrderTshirtResponse.orderId default ""
 }]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
