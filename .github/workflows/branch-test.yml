@@ -17,6 +17,11 @@ jobs:
         with:
           distribution: 'adopt'
           java-version: '8'
+      - name: Write config file
+        run: 'echo "$SANDBOX_ENV_FILE" > src/main/resources/config/configuration.yaml'
+        shell: bash
+        env:
+          SANDBOX_ENV_FILE: ${{ secrets.SANDBOX_CONFIG }}
       - name: Build and test
         run: mvn -B package -s .maven/settings.xml
         env:
