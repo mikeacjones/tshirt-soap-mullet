@@ -29,3 +29,4 @@ jobs:
           PLATFORM_PASSWORD: ${{ secrets.PLATFORM_PASSWORD }}
           NEXUS_USERNAME: ${{ secrets.NEXUS_USERNAME }}
           NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
+          anypoint.platform.autodiscovery: '17300904'
