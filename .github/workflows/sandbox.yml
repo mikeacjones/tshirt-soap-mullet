@@ -7,7 +7,7 @@ on:
 
 
 jobs:
-  build:
+  build-and-deploy-sandbox:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -16,6 +16,11 @@ jobs:
         with:
           distribution: 'adopt'
           java-version: '8'
+      - name: Write config file
+        run: 'echo "$SANDBOX_ENV_FILE" > src/main/resources/config/configuration.yaml'
+        shell: bash
+        env:
+          SANDBOX_ENV_FILE: ${{ secrets.SANDBOX_CONFIG }}
       - name: Build and deploy
         run: mvn -B deploy -DskipTests -DmuleDeploy -s .maven/settings.xml
         env:
