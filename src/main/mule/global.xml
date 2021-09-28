@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:api-gateway="http://www.mulesoft.org/schema/mule/api-gateway" xmlns="http://www.mulesoft.org/schema/mule/core"
-	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
-http://www.mulesoft.org/schema/mule/api-gateway http://www.mulesoft.org/schema/mule/api-gateway/current/mule-api-gateway.xsd">
+<mule xmlns:wsc="http://www.mulesoft.org/schema/mule/wsc" xmlns:api-gateway="http://www.mulesoft.org/schema/mule/api-gateway"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/api-gateway http://www.mulesoft.org/schema/mule/api-gateway/current/mule-api-gateway.xsd
+http://www.mulesoft.org/schema/mule/wsc http://www.mulesoft.org/schema/mule/wsc/current/mule-wsc.xsd">
 	<api-gateway:autodiscovery apiId="${anypoint.platform.autodiscovery}" ignoreBasePath="true" doc:name="API Autodiscovery" doc:id="802e3e73-d6f3-433c-b901-ec2056b5be22" flowRef="tshirt-soap-mullet-main" />
+	<configuration-properties doc:name="Configuration properties" doc:id="e03b5d8a-5e5e-44f6-988b-c75f4a10335e" file="config/configuration.yaml" />
+	<wsc:config name="Web_Service_Consumer_Config" doc:name="Web Service Consumer Config" doc:id="ebcb2f27-fc2c-48ec-8a20-f368ef528033" >
+		<wsc:connection wsdlLocation="${tshirtService.wsdlLocation}" service="TshirtServicePortTypeService" port="TshirtServicePortTypePort" address="${tshirtService.address}" />
+	</wsc:config>
 </mule>
