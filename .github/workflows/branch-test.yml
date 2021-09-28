@@ -23,10 +23,10 @@ jobs:
         env:
           SANDBOX_ENV_FILE: ${{ secrets.SANDBOX_CONFIG }}
       - name: Build and test
-        run: mvn -B package -s .maven/settings.xml
+        run: mvn -B package -Danypoint.platform.autodiscovery=$AUTODISCOVERY_ID -s .maven/settings.xml
         env:
           PLATFORM_USERNAME: ${{ secrets.PLATFORM_USERNAME }}
           PLATFORM_PASSWORD: ${{ secrets.PLATFORM_PASSWORD }}
           NEXUS_USERNAME: ${{ secrets.NEXUS_USERNAME }}
           NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
-          anypoint.platform.autodiscovery: '17300904'
+          AUTODISCOVERY_ID: '17300904'
