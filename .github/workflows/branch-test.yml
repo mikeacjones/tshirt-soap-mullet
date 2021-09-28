@@ -18,7 +18,7 @@ jobs:
           distribution: 'adopt'
           java-version: '8'
       - name: Build and test
-        run: mvn package -s .maven/settings.xml
+        run: mvn -B package -s .maven/settings.xml
         env:
           PLATFORM_USERNAME: ${{ secrets.PLATFORM_USERNAME }}
           PLATFORM_PASSWORD: ${{ secrets.PLATFORM_PASSWORD }}
